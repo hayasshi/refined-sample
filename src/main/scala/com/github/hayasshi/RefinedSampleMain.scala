@@ -23,9 +23,14 @@ class RefinedSampleMain {
 
   @Benchmark
   def runCreateAssertObjectsByVariables(): Unit = {
-
     (1 to 10000).foreach { i =>
-      AssertionUser(AssertionUserId(i.toLong), AssertionUserName("A" + i), AssertionUserAge(100 + i))
+      for {
+        id   <- Option(i.toLong)
+        name <- Option("A" + i)
+        age  <- Option(100 + i)
+      } yield {
+        AssertionUser(AssertionUserId(id), AssertionUserName(name), AssertionUserAge(age))
+      }
     }
   }
 
