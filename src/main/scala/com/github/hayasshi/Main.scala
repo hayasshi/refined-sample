@@ -6,10 +6,10 @@ import com.github.hayasshi.refined._
 import eu.timepit.refined._
 import org.openjdk.jmh.annotations.Benchmark
 
-class RefinedSampleMain {
+class Main {
 
   @Benchmark
-  def runCreateRefinedObjectsByVariables(): Unit = {
+  def runCreateRefinedObjects(): Unit = {
     (1 to 10000).foreach { i =>
       for {
         id   <- refineV[UserIdRefinedType](i.toLong)
@@ -22,7 +22,7 @@ class RefinedSampleMain {
   }
 
   @Benchmark
-  def runCreateAssertObjectsByVariables(): Unit = {
+  def runCreateAssertObjects(): Unit = {
     (1 to 10000).foreach { i =>
       for {
         id   <- Option(i.toLong)
